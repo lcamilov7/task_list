@@ -5,12 +5,14 @@ class TasksController < ApplicationController
   end
   def new
     @task = Task.new
+    render turbo_stream: turbo_stream.update('task_drawer_container', task_drawer(@task))
   end
   def create
+    binding.irb
     @task = Task.new(task_params)
 
     if @task.save
-      
+
     else
       render :new, status: :unprocessable_entity
     end
@@ -18,6 +20,7 @@ class TasksController < ApplicationController
   def edit; end
 
   def update
+    binding.irb
     if @task.update(task_params)
 
     else
@@ -36,5 +39,9 @@ class TasksController < ApplicationController
 
   def task_params
     params.require(:task).permit(:title, :description)
+  end
+
+  def task_drawer(task)
+    Tasks::DrawerComponent.new(task:)
   end
 end
