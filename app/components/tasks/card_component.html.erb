@@ -1,0 +1,29 @@
+<div class="bg-white rounded-xl shadow-md p-4 mb-4 flex flex-col gap-3 sm:flex-row sm:justify-between sm:items-start"
+     data-controller="<%= STIMULUS_CONTROLLER %>">
+  <div class="flex-1">
+    <h2 class="text-lg font-semibold text-gray-800"><%= @task.title %></h2>
+
+    <button
+      type="button"
+      class="mt-2 cursor-pointer"
+      data-action="click-><%= STIMULUS_CONTROLLER %>#toggleDescription" aria-expanded="false">
+      <div data-<%= STIMULUS_CONTROLLER %>-target="chevron">
+        <%= render Image::SvgComponent.new(
+          icon: 'chevron',
+          classes: 'text-gray-500  stroke-2'
+        ) %>
+      </div>
+    </button>
+
+    <div class="mt-1 text-gray-600 hidden" data-<%= STIMULUS_CONTROLLER %>-target="description">
+      <%= @task.description %>
+    </div>
+  </div>
+
+  <div class="flex flex-col sm:flex-row gap-2 mt-3 sm:mt-0 sm:ml-4">
+    <%= link_to 'Editar', edit_task_path(@task), class: "text-sm px-3 py-1 bg-yellow-400 text-white rounded hover:bg-yellow-500" %>
+
+    <%= link_to 'Eliminar', task_path(@task), method: :delete, data: { confirm: '¿Estás seguro?' },
+        class: "text-sm px-3 py-1 bg-red-500 text-white rounded hover:bg-red-600" %>
+  </div>
+</div>

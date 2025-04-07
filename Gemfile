@@ -65,3 +65,7 @@ gem "tailwindcss-ruby", "~> 4.0"
 gem "tailwindcss-rails", "~> 4.2"
 
 gem "view_component"
+
+gem "stimulus_reflex", "~> 3.5"
+
+gem "redis-session-store", "~> 0.11.5"

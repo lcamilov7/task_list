@@ -1,0 +1,15 @@
+<div class="fixed inset-0 bg-black/50 z-40">
+  <div class="<%= drawer_classes %>" data-reflex-root>
+    <div class="relative p-4 h-full">
+      <!-- Botón de cerrar -->
+      <button
+        class="absolute top-4 right-4 text-gray-500 hover:text-gray-800 cursor-pointer"
+        data-reflex="click->DrawerComponent#close">
+        ✕
+      </button>
+
+      <h2 class="text-lg font-bold mb-4"><%= title %></h2>
+      <%= content %>
+    </div>
+  </div>
+</div>
