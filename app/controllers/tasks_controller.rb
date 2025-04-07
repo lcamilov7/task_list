@@ -2,17 +2,19 @@ class TasksController < ApplicationController
   before_action :set_task, only: [:edit, :update, :destroy]
   def index
     @tasks = Task.all
+    respond_to do |format|
+      format.html { render(index_view_component(tasks: @tasks)) }
+      format.turbo_stream
+    end
   end
   def new
     @task = Task.new
-    render turbo_stream: turbo_stream.update('task_drawer_container', task_drawer(@task))
   end
   def create
-    binding.irb
     @task = Task.new(task_params)
 
     if @task.save
-
+      render turbo_stream: turbo_stream.update(:tasks_index, index_view_component(tasks: Task.all))
     else
       render :new, status: :unprocessable_entity
     end
@@ -20,15 +22,16 @@ class TasksController < ApplicationController
   def edit; end
 
   def update
-    binding.irb
     if @task.update(task_params)
-
+      render turbo_stream: turbo_stream.update(:tasks_index, index_view_component(tasks: Task.all))
     else
       render :edit, status: :unprocessable_entity
     end
   end
+
   def destroy
     @task.destroy
+    render turbo_stream: turbo_stream.update(:tasks_index, index_view_component(tasks: Task.all))
   end
 
   private
@@ -38,10 +41,10 @@ class TasksController < ApplicationController
   end
 
   def task_params
-    params.require(:task).permit(:title, :description)
+    params.require(:task).permit(:title, :description, :status)
   end
 
-  def task_drawer(task)
-    Tasks::DrawerComponent.new(task:)
+  def index_view_component(tasks:)
+    Tasks::Index::ViewComponent.new(tasks:)
   end
 end
