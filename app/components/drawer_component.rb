@@ -7,7 +7,7 @@ class DrawerComponent < ViewComponent::Base
   private
 
   def drawer_classes
-    'bg-white
+    'bg-gray-50
     shadow-lg
     z-50
     fixed

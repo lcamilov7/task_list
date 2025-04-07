@@ -1,5 +1,5 @@
 class DrawerComponentReflex < ApplicationReflex
   def close
-    morph('#task_drawer_container', '')
+    morph("#task-drawer-container", "")
   end
 end

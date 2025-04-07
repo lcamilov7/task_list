@@ -1,0 +1,3 @@
+<%= turbo_stream.update('task-drawer-container') do %>
+  <%= render Tasks::DrawerComponent.new(task: @task) %>
+<% end %>

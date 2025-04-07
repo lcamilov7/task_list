@@ -1,5 +1,7 @@
 module Tasks
   class DrawerComponent < ViewComponent::Base
+    STIMULUS_CONTROLLER = 'tasks--drawer-component'
+
     def initialize(task:)
       @task = task
     end

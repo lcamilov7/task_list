@@ -1,25 +1,40 @@
-<%= render(DrawerComponent.new) do |drawer| %>
-    <% drawer.with_title do %>
-      <div class="text-gray-900 text-lg font-bold font-inter leading-[27px]"><%= title %></div>
-    <% end %>
+<div class="p-3 bg-white" >
+  <%= render(DrawerComponent.new) do |drawer| %>
+      <% drawer.with_title do %>
+        <div class="text-gray-900 text-lg font-bold font-inter leading-[27px]"><%= title %></div>
+      <% end %>
 
-  <%= form_with model: @task, url: do |f| %>
-    <div class="mb-4">
-      <%= f.label :title, "Title", class: "block text-sm font-medium text-gray-700" %>
-      <%= f.text_field :title, class: "mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" %>
-    </div>
+    <div class="mb-4 mx-2">
+      <%= form_with model: @task, url: do |f| %>
+        <% if @task.errors.any? %>
+          <div class="mb-4 p-4 bg-red-100 text-red-700 rounded">
+            <h2 class="font-bold mb-2">Errors:</h2>
+            <ul class="list-disc list-inside">
+              <% @task.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
 
-    <div class="mb-4">
-      <%= f.label :description, "Description", class: "block text-sm font-medium text-gray-700" %>
-      <%= f.text_area :description, rows: 5, class: "mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" %>
-    </div>
+        <div class="mb-4 mt-2">
+          <%= f.label :title, "Title", class: "block text-sm font-medium text-gray-700" %>
+          <%= f.text_field :title, class: "mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 p-2" %>
+        </div>
 
-    <div>
-      <%= f.submit save_copy, class: "inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 cursor-pointer" %>
-      <button type="button" data-reflex="click->DrawerComponent#close"
-              class="ml-2 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md bg-white hover:bg-gray-50 text-black cursor-pointer">
-        Cancel
-      </button>
+        <div class="mb-4">
+          <%= f.label :description, "Description", class: "block text-sm font-medium text-gray-700" %>
+          <%= f.text_area :description, rows: 5, class: "mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 p-2" %>
+        </div>
+
+        <div>
+          <%= f.submit save_copy, class: 'inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 cursor-pointer'%>
+          <button type="button" data-reflex="click->DrawerComponent#close"
+                  class="ml-2 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md bg-white hover:bg-gray-50 text-black cursor-pointer">
+            Cancel
+          </button>
+        </div>
+      <% end %>
     </div>
   <% end %>
-<% end %>
+</div>
