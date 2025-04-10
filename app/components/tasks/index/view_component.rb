@@ -6,6 +6,8 @@ module Tasks
     class ViewComponent < ::ViewComponent::Base
       include Turbo::FramesHelper
 
+      CLOCK_CONTROLLER = 'tasks--clock'
+
       def initialize(tasks:)
         @tasks = tasks
       end

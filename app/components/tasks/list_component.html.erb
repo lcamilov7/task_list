@@ -1,3 +1,7 @@
-<% @tasks.each do |task|%>
-  <%= render(Tasks::CardComponent.new(task:)) %>
+<% if @tasks.empty? %>
+  <%= render(Tasks::EmptyStateComponent.new) %>
+<% else %>
+  <% @tasks.each do |task|%>
+    <%= render(Tasks::CardComponent.new(task:)) %>
+  <% end %>
 <% end %>
