@@ -1,0 +1,5 @@
+<%= turbo_stream.replace(dom_id(@task)) do %>
+  <%= render(Tasks::CardComponent.new(task: @task)) %>
+<% end %>
+<%= turbo_stream.update('task-drawer-container') do %>
+<% end %>

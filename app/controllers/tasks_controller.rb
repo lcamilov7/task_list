@@ -5,7 +5,7 @@ class TasksController < ApplicationController
 
     respond_to do |format|
       format.html { render(index_view_component(tasks: @tasks)) }
-      format.turbo_stream { turbo_response(@tasks) }
+      format.turbo_stream { turbo_response(tasks: @tasks, params:) }
     end
   end
 
@@ -17,7 +17,7 @@ class TasksController < ApplicationController
     @task = Task.new(task_params)
 
     if @task.save
-      turbo_response(Task.all)
+      turbo_response(tasks: Task.all)
     else
       render :new, status: :unprocessable_entity
     end
@@ -26,17 +26,15 @@ class TasksController < ApplicationController
   def edit; end
 
   def update
-    if @task.update(task_params)
-      turbo_response(Task.all)
-    else
+    unless @task.update(task_params)
       render :edit, status: :unprocessable_entity
     end
   end
 
   def destroy
     @task.destroy
-    turbo_response(Task.all)
   end
+
 
   private
 
@@ -48,11 +46,11 @@ class TasksController < ApplicationController
     params.require(:task).permit(:title, :description, :done)
   end
 
-  def index_view_component(tasks:)
-    Tasks::Index::ViewComponent.new(tasks:)
+  def index_view_component(tasks:, params: nil)
+    Tasks::Index::ViewComponent.new(tasks:, params:)
   end
 
-  def turbo_response(tasks)
-    render turbo_stream: turbo_stream.replace(:tasks_index, index_view_component(tasks:))
+  def turbo_response(tasks:, params: nil)
+    render turbo_stream: turbo_stream.replace(:tasks_index, index_view_component(tasks:, params:))
   end
 end

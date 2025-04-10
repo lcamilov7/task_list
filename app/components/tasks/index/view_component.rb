@@ -8,11 +8,18 @@ module Tasks
 
       CLOCK_CONTROLLER = 'tasks--clock'
 
-      def initialize(tasks:)
+      def initialize(tasks:, params: nil)
         @tasks = tasks
+        @params = params
       end
 
-      attr_reader :tasks
+      attr_reader :tasks, :params
+
+      private
+
+      def done?
+        params&.dig(:query, :done)
+      end
     end
   end
 end
