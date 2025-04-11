@@ -2,7 +2,6 @@
 # frozen_string_literal: true
 
 module Image
-  # Generate SVG images
   class SvgComponent < ViewComponent::Base
     def initialize(icon:, classes: nil, id: nil, **args)
       @icon = icon
@@ -13,9 +12,7 @@ module Image
 
     def call
       content_tag(:i, class: classes, id:, **args) do
-        # rubocop:disable Rails/RenderInline
         render(inline: Rails.root.join("app/assets/images/#{icon}.svg").read)
-        # rubocop:enable Rails/RenderInline
       end
     end
 

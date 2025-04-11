@@ -19,16 +19,14 @@ class TasksController < ApplicationController
     if @task.save
       turbo_response(tasks: Task.all)
     else
-      render :new, status: :unprocessable_entity
+      head :unprocessable_entity
     end
   end
 
   def edit; end
 
   def update
-    unless @task.update(task_params)
-      render :edit, status: :unprocessable_entity
-    end
+    head :unprocessable_entity unless @task.update(task_params)
   end
 
   def destroy
