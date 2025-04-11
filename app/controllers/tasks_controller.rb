@@ -1,7 +1,10 @@
 class TasksController < ApplicationController
   before_action :set_task, only: [:edit, :update, :destroy]
+
+  # Each restful method responds with turbo stream with their .turbo_tream.erb file accordingly
+
   def index
-    @tasks = params[:query] ? Tasks::FilterService.new(params[:query]).filter : Task.all
+    @tasks = Tasks::FilterService.new(params[:query]).filter
 
     respond_to do |format|
       format.html { render(index_view_component(tasks: @tasks)) }
@@ -19,14 +22,14 @@ class TasksController < ApplicationController
     if @task.save
       turbo_response(tasks: Task.all)
     else
-      head :unprocessable_entity
+      render :new, status: :unprocessable_entity
     end
   end
 
   def edit; end
 
   def update
-    head :unprocessable_entity unless @task.update(task_params)
+    render :edit, status: :unprocessable_entity unless @task.update(task_params)
   end
 
   def destroy
