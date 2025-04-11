@@ -1,4 +1,4 @@
-<div class="p-3 bg-white" >
+<div class="p-3 bg-white" data-controller="<%= STIMULUS_CONTROLLER %>">
   <%= render(DrawerComponent.new) do |drawer| %>
       <% drawer.with_title do %>
         <div class="text-gray-900 text-lg font-bold font-inter leading-[27px]"><%= title %></div>
@@ -29,7 +29,7 @@
 
         <div>
           <%= f.submit save_copy, class: 'inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 cursor-pointer'%>
-          <button type="button" data-reflex="click->DrawerComponent#close"
+          <button type="button" data-action="click-><%= STIMULUS_CONTROLLER %>#close"
                   class="ml-2 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md bg-white hover:bg-gray-50 text-black cursor-pointer">
             Cancel
           </button>

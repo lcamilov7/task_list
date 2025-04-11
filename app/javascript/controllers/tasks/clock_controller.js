@@ -4,7 +4,6 @@ export default class extends Controller {
   static targets = ["time"]
 
   connect() {
-    console.log('connected')
     this.updateTime()
     this.timer = setInterval(() => this.updateTime(), 1000)
   }

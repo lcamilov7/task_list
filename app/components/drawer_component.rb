@@ -1,4 +1,5 @@
 class DrawerComponent < ViewComponent::Base
+  STIMULUS_CONTROLLER = 'drawer-component'
   renders_one :title
 
   def initialize
