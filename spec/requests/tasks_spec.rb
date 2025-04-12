@@ -42,7 +42,7 @@ RSpec.describe TasksController, type: :request do
     end
 
     it 'returns 422 with invalid params' do
-      post tasks_path, params: invalid_params
+      post tasks_path, params: invalid_params, as: :turbo_stream
 
       expect(response).to have_http_status(:unprocessable_entity)
     end
@@ -65,13 +65,13 @@ RSpec.describe TasksController, type: :request do
     let(:task) { create(:task) }
 
     it 'updates the task with valid params' do
-      patch task_path(task), params: { task: { done: true } }
+      patch task_path(task), params: { task: { done: true } }, as: :turbo_stream
 
       expect(task.reload.done).to eq(true)
     end
 
     it 'returns 422 with invalid params' do
-      patch task_path(task), params: { task: { title: 'a' } }
+      patch task_path(task), params: { task: { title: 'a' } }, as: :turbo_stream
 
       expect(response).to have_http_status(:unprocessable_entity)
     end

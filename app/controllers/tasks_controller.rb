@@ -2,7 +2,6 @@ class TasksController < ApplicationController
   before_action :set_task, only: [:edit, :update, :destroy]
 
   # Each restful method responds with turbo stream with their .turbo_tream.erb file accordingly
-
   def index
     @tasks = Tasks::FilterService.new(params[:query]).filter
 
@@ -35,7 +34,6 @@ class TasksController < ApplicationController
   def destroy
     @task.destroy
   end
-
 
   private
 
