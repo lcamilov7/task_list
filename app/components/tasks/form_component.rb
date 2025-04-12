@@ -1,6 +1,6 @@
 module Tasks
-  class DrawerComponent < ViewComponent::Base
-    STIMULUS_CONTROLLER = 'drawer-component'
+  class FormComponent < ViewComponent::Base
+    DRAWER_CONTROLLER = 'drawer-component'
 
     def initialize(task:)
       @task = task

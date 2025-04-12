@@ -1,5 +1,6 @@
 class TasksController < ApplicationController
   before_action :set_task, only: [:edit, :update, :destroy]
+  rescue_from ActionView::MissingTemplate, ActionController::UnknownFormat, with: :handle_missing_template
 
   # Each restful method responds with turbo stream with their .turbo_tream.erb file accordingly
   def index
@@ -51,5 +52,9 @@ class TasksController < ApplicationController
 
   def turbo_response(tasks:, params: nil)
     render turbo_stream: turbo_stream.replace(:tasks_index, index_view_component(tasks:, params:))
+  end
+
+  def handle_missing_template
+    redirect_to tasks_path
   end
 end

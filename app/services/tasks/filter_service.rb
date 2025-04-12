@@ -1,4 +1,5 @@
 module Tasks
+  # This service will manage all the filters that are required for the tasks to show in the index.
   class FilterService
     def initialize(params)
       @params = params
