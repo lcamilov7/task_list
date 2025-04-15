@@ -11,7 +11,13 @@
       </div>
     </div>
 
-    <div class="bg-white rounded-t-xl shadow-lg w-full max-w-xl border-b border-gray-200">
+    <div class="w-full max-w-xl flex items-center justify-center">
+            <%= link_to '+',
+                  new_task_path,
+                  class: 'flex items-center text-4xl justify-center w-full text-white bg-blue-600 hover:bg-blue-700 rounded-xl py-2 shadow transition',
+                  data: { turbo_stream: true } %>
+    </div>
+    <div class="bg-white rounded-t-xl shadow-lg w-full max-w-xl border-b border-gray-200 mt-4">
       <div class="grid grid-cols-3 text-center">
         <%= link_to 'DONE',
                     tasks_path(params: { query: { done: true } }),
@@ -34,12 +40,6 @@
       <div id="tasks-card-list">
         <%= render(Tasks::ListComponent.new(tasks: @tasks)) %>
       </div>
-    </div>
-    <div class="w-full max-w-xl flex items-center justify-center">
-            <%= link_to '+',
-                  new_task_path,
-                  class: 'flex items-center text-4xl justify-center w-full text-white bg-blue-600 hover:bg-blue-700 rounded-xl mt-4 py-2 shadow transition',
-                  data: { turbo_stream: true } %>
     </div>
     <div id="task-drawer-container"></div>
   </div>

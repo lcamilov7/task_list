@@ -29,7 +29,13 @@ class TasksController < ApplicationController
   def edit; end
 
   def update
-    render :edit, status: :unprocessable_entity unless @task.update(task_params)
+    if @task.update(task_params)
+      respond_to do |format|
+        format.turbo_stream
+      end
+    else
+      render :edit, status: :unprocessable_entity
+    end
   end
 
   def destroy
