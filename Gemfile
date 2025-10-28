@@ -60,7 +60,7 @@ group :test do
   gem 'shoulda-matchers', '~> 5.0'
 end
 
-gem "tailwindcss-ruby", "~> 4.0"
+gem "tailwindcss-ruby", "~> 4.1"
 
 gem "tailwindcss-rails", "~> 4.2"
 
